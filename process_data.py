@@ -98,10 +98,12 @@ def main():
     name = "CR6Series_TenMin"
     file_extension = ".csv"
     data = pd.read_csv("processable_" + name + file_extension)
+    data = data.drop_duplicates()
     try:
         data = data.drop("RECORD", axis=1)
     except Exception:
         pass
+
 
     print("Sorting:")
     num_rows = data.shape[0] - 1
