@@ -14,7 +14,7 @@ weather_fixed <- weather %>%
 weather_fixed_new <- distinct(weather_fixed)
   
 write_csv(weather_fixed,
-          "C:\\Users\\K-Squeezy\\Desktop\\SchoolFiles\\MachineLearning\\FinalProject\\daily_high_temps.csv")
+          "daily_high_temps.csv")
 
 write_csv(weather_fixed_new,
-          "C:\\Users\\K-Squeezy\\Desktop\\SchoolFiles\\MachineLearning\\FinalProject\\daily_high_temps_distinct.csv")
+          "daily_high_temps_distinct.csv")
