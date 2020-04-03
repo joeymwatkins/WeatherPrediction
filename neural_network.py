@@ -18,7 +18,7 @@ def main():
     # data = data.drop("min_AirTC_Avg", axis=1).drop("max_AirTC_Avg", axis=1).drop(data.columns[0], axis=1)
     #
 
-    data = pd.read_csv("daily_high_temps_distinct.csv")
+    data = pd.read_csv("CR6Series_TenMin_wout headers.csv")
     data = data.drop(["TIMESTAMP", "RECORD"], axis=1)
 
     target_name = "AirTF_Avg"
@@ -31,7 +31,7 @@ def main():
 
     data_train, data_test, targets_train, targets_test = train_test_split(data, targets,
                                                                           train_size=train_size)
-    classifier = MLPRegressor(max_iter=1000000, verbose=True, n_iter_no_change=1000,
+    classifier = MLPRegressor(max_iter=1000000, verbose=True, n_iter_no_change=100,
                               hidden_layer_sizes=(10, 7, 6, 4, 7, 9, 7, 10, 16))
     classifier.fit(data_train, targets_train)
 

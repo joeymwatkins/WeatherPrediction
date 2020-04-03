@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import normalize
 from sklearn.ensemble import ExtraTreesRegressor
+from sklearn.metrics import r2_score
 
 
 def analyze_predictions(predictions, targets, name):
@@ -12,6 +13,22 @@ def analyze_predictions(predictions, targets, name):
         if (targets[i] + 5) >= predictions[i] >= (targets[i] - 5):
             correct += 1
     print(f"{name} Correct: {correct}/{len(predictions)}    {correct/len(predictions) * 100:.2f}%")
+
+
+
+def print_results(predictions, targets):
+    print("Pred.     Targ.   Dif.")
+    for i in range(len(predictions)):
+        diff = predictions[i] - targets[i]
+        print(f"{predictions[i]:.2f}     {diff:.2f}")
+
+
+def get_within(predictions, targets, degrees):
+    num_within = 0
+    for i in range(len(predictions)):
+        if (targets[i] - degrees) <= predictions[i] <= (targets[i] + degrees):
+            num_within += 1
+    print(f"Within {degrees} degrees: {num_within}")
 
 
 def main():
@@ -34,6 +51,15 @@ def main():
     predictions = classifier.predict(data_test)
 
     analyze_predictions(predictions, targets_test, "ExtraTreesRegressor")
+
+    r2 = r2_score(targets_test, predictions)
+
+    print(f"Avg. Difference: {61 - 61 * r2}")
+
+    print(f"R2: {r2}")
+
+    print_results(predictions, targets_test)
+    get_within(predictions, targets, 5)
 
 
 if __name__ == "__main__":
